@@ -1,0 +1,10 @@
+DISCORD_TOKEN= bot_token
+
+GUILD_ID= guild_id
+
+SQL_USER= username
+SQL_PASSWORD= password
+
+SQL_HOST= HOST_LINK
+SQL_PORT= PORT
+SQL_DATABASE= DB_NAME

@@ -45,12 +45,15 @@ class DiscordBot:
         async def on_message(message):
             await self.handle_message(message)
             
-    async def handle_message(self, message):
-        """
-        Put functionality here if you want to do
-        somthing on basic messages.
-        """
-        return
+    # async def handle_message(self, message):
+    #     """
+    #     Put functionality here if you want to do
+    #     somthing on basic messages.
+    #     """
+    #     return
+    
+    # for more events check out here
+    # https://discordpy.readthedocs.io/en/stable/api.html#event-reference
     
     def run(self, token):
         self.client.run(token)

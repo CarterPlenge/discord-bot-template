@@ -23,7 +23,12 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
     async def request(interaction: Interaction, game: str, platform: app_commands.Choice[str]):
         platform_value = platform.value if isinstance(platform, app_commands.Choice) else platform
         
-        success, message = database.add_game_request(interaction.user.id, game, platform_value)
+        success, message = database.add_game_request(
+                interaction.guild_id,
+                interaction.user.id,
+                game,
+                platform_value
+            )
         
         if success:
             response = ""

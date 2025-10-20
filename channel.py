@@ -1,3 +1,9 @@
+"""
+Commands can be configured from discord server settings.
+Not recommended you used this unless you have a specific need. 
+"""
+
+
 from discord import app_commands, Interaction
 from functools import wraps
 
@@ -17,9 +23,7 @@ def require_channel(channel_name: str):
     return decorator
 
 def require_any_channel(*channel_names: str):
-    """restricts a command to any of the specified channels.
-
-    """
+    """restricts a command to any of the specified channels."""
     def decorator(func):
         @wraps(func)
         async def wrapper(interaction: Interaction, *args, **kwargs):

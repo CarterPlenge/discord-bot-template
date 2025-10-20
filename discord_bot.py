@@ -63,6 +63,6 @@ if __name__ == "__main__":
     TOKEN = os.getenv('DISCORD_TOKEN')
     GUILD_ID = int(os.getenv('GUILD_ID')) if os.getenv('GUILD_ID') else None
     
-    bobbyBearcat = DiscordBot(db, GUILD_ID)
-    bobbyBearcat.run(TOKEN)
+    bot = DiscordBot(db, GUILD_ID)
+    bot.run(TOKEN)
             

@@ -6,7 +6,6 @@ def register(tree, database, guild_id):
     guild = Object(id=guild_id) if guild_id else None
 
     @tree.command(name="database-query", description="Query the database for information", guild=guild)
-    @require_any_role("admin")
     @app_commands.describe(
         databasequery="What do you want to query for?"
     )

@@ -5,7 +5,6 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
     guild = Object(id=guild_id) if guild_id else None
 
     @tree.command(name="health-check", description="Check bot and db health ", guild=guild)
-    @require_any_role("admin", "mod")
     async def health_check(interaction: Interaction):
         success = database.test_connection()
         

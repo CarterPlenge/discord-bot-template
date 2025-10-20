@@ -20,7 +20,6 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
             app_commands.Choice(name="Switch", value="Switch")
         ]
     )
-    @require_channel("game-requests")
     async def request(interaction: Interaction, game: str, platform: app_commands.Choice[str]):
         platform_value = platform.value if isinstance(platform, app_commands.Choice) else platform
         

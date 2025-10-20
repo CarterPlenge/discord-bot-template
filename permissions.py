@@ -1,3 +1,8 @@
+"""
+Commands can be configured from discord server settings.
+Not recommended you used this unless you have a specific need. 
+"""
+
 from discord import app_commands, Interaction
 from functools import wraps
 

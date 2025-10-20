@@ -50,6 +50,7 @@ def register(tree, database, guild_id):
 
     # This will lock the command to only work if someone has a specific role
     # ommiting this will result in it being callable by anyone. (like the about command)
+    # UPDATE: Recommned not setting this and using discords built in methood instead. Same for channel.
     @require_any_role("Esports Staff", "President", "Trusted bot contributor")
 
     # Here we will describe parameters and give them a discription

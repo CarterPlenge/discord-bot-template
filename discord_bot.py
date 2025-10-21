@@ -41,9 +41,9 @@ class DiscordBot:
             print(f"Joined new guild: {guild.name} (ID: {guild.id})")
             self.database.get_guild_settings(guild.id)
     
-        @self.client.event 
-        async def on_message(message):
-            await self.handle_message(message)
+        # @self.client.event 
+        # async def on_message(message):
+        #     await self.handle_message(message)
             
     # async def handle_message(self, message):
     #     """

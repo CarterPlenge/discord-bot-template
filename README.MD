@@ -2,8 +2,7 @@
 This is a templete for creating a discord bot with a database. This is based on a refactor i made for my [college's discord bot](https://github.com/GameMagma/NWMSU-Bot/pull/1). 
 
 check other branches for differnt templetes
- - no-examples  // doesnt have example code
- - no-db        // doesnt have example code or a database
+ - no-database        // doesnt have example code or a database
 
 ## Getting started
 ### Getting the project locally

@@ -83,19 +83,14 @@ This is a full list of things you should change to match your use case
 basic overview of the project arcitecture
 ```
 commands/            # holds all commands
-├── user/            # commands in here should be callable for all users
-│   ├── gameRequest.py  # example database write command
-│   ├── about.py
-│   └── __init__.py  # used to init commands in this folder
-├── mod/           # commands in here should be callable for boad members
-│   ├── health_check.py
-│   ├── say.py
-│   └── __init__.py 
-├── admin/           # commands in here should be callable for select few
-│   ├── database_query.py   # example database read command
-│   ├── status.py
-│   └── __init__.py 
-└── __init__.py     # used to get commands from the other __init__.py files
+├── gameRequest.py  # example database write command
+├── about.py
+├── health_check.py
+├── say.py
+├── database_query.py   # example database read command
+├── status.py
+└── __init__.py 
+
 docs/               # holds additional documentation
 
 .dockerignore       # tells docker what to ignore (not copy)
@@ -103,8 +98,11 @@ docs/               # holds additional documentation
 .gitignore          # tells git what to ignore
 requirements.txt    # keeps all required external libraries needed to run this project
 
-channel.py          # holds logic for locking commands to channels
-clearCommands.py    # purges all commands; debugging script; will probably be removed
+# I would recommend using discords built in way of locking slash commands
+# but if you want control with code you can use these
+channel.py          # holds additional logic for locking commands to channels
+permissions.py      # holds additional logic for locking commands to roles
+
 SQLManager          # holds logic for database operations
 discordBot.py       # defines class discordBot which interacts with discord
 

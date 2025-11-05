@@ -21,6 +21,7 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
         ]
     )
     async def request(interaction: Interaction, game: str, platform: app_commands.Choice[str]):
+        """Allows users to request games on platforms and stores the info in the database"""
         platform_value = platform.value if isinstance(platform, app_commands.Choice) else platform
         
         success, message = database.add_game_request(

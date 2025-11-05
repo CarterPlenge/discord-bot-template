@@ -6,6 +6,7 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
 
     @tree.command(name="health-check", description="Check bot and db health ", guild=guild)
     async def health_check(interaction: Interaction):
+        """Sends a message containing the databases current status"""
         success = database.test_connection()
         
         if success:

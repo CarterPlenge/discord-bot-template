@@ -7,6 +7,7 @@ load_dotenv()
 
 class DiscordBot:
     def __init__(self, database, guild_id: int | None = None):
+        """Initalize the discord bot"""
         intents = discord.Intents.default()
         intents.message_content = True
         self.client = discord.Client(intents=intents)
@@ -43,6 +44,7 @@ class DiscordBot:
     
         # @self.client.event 
         # async def on_message(message):
+        #     """Called when a message is sent"""
         #     await self.handle_message(message)
             
     # async def handle_message(self, message):

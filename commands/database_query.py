@@ -15,6 +15,7 @@ def register(tree, database, guild_id):
         ]
     )
     async def database_query(interaction: Interaction, databasequery: str):
+        """Handle database querys"""
         try:
             if databasequery == "gameRequest":
                 status, response = database.get_game_requests(guild_id)

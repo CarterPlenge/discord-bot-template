@@ -5,7 +5,7 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
 
     @tree.command(name="about", description="About this bot", guild=guild)
     async def about(interaction: Interaction):
-        """Print info about the bot"""
+        """Prints info about the bot"""
         
         message = """
         This bot was made using a templete from

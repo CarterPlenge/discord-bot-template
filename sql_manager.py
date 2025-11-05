@@ -113,7 +113,7 @@ class SQLManager:
             return (False, f"Error deleting game request: {str(e)}")
 
     def get_guild_settings(self, guild_id: int) -> Tuple[bool, dict]:
-        """Get settings"""
+        """Gets guild settings"""
         try:
             query = """
                 SELECT * FROM guild_settings 

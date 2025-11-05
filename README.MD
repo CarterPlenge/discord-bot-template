@@ -68,14 +68,16 @@ This template comes with examples included in it.
 Check branches for templates without examples
 
 This is a full list of things you should change to match your use case
- - init.sql         // change to match your database
+ - init.sql         
+    - change to match your database
 
- - sql_manager.py   // define new functions to match your database
+ - sql_manager.py 
+    - define new functions to match your database
 
- - commands/*       // update commands for your use case 
-                    // Note: leave the __init__.py files they are not commands
-                    // game_request, database_query, and about.py
-                    // should almost always be changed as there examples
+ - commands/*       
+    - update all commands for your use case 
+    - Note: leave the __init__.py file; it is not a command
+    - game_request, database_query, and about.py should almost always be changed as they are examples
 
 
 

@@ -2,8 +2,6 @@ from discord import app_commands, Object, Interaction
 from channel import require_channel
 from sql_manager import SQLManager
 
-database = SQLManager()
-
 def register(tree: app_commands.CommandTree, database, guild_id: int):
     guild = Object(id=guild_id) if guild_id else None
 

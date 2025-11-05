@@ -1,7 +1,7 @@
-# Discord bot templete
-This is a templete for creating a discord bot with a database. This is based on a refactor i made for my [college's discord bot](https://github.com/GameMagma/NWMSU-Bot/pull/1). 
+# Discord bot template
+This is a template for creating a discord bot with a database. This is based on a refactor i made for my [college's discord bot](https://github.com/GameMagma/NWMSU-Bot/pull/1). 
 
-check other branches for differnt templetes
+check other branches for differnt templates
  - no-database        // doesnt have a database
 
 ## Getting started
@@ -64,8 +64,8 @@ use ```docker compose down``` to stop containers
 You should have a working local clone of the project now
 
 ## What needs reconfigured?
-This templete comes with examples included in it. 
-Check branches for templetes without examples
+This template comes with examples included in it. 
+Check branches for templates without examples
 
 This is a full list of things you should change to match your use case
  - init.sql         // change to match your database

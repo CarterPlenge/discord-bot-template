@@ -2,6 +2,11 @@ from discord import app_commands, Object, Interaction
 from permissions import require_any_role
 from datetime import datetime
 
+# Prevent messages > 2000 characters; discord enforces this
+MAX_MESSAGE_LENGHT = 1900
+DATE_FORMATE = "%Y-%m-%d %H:%M"
+
+
 def register(tree, database, guild_id):
     guild = Object(id=guild_id) if guild_id else None
 
@@ -32,19 +37,17 @@ def register(tree, database, guild_id):
                 for row in response:
                     created_at = row["created_at"]
 
-                    created_str = created_at.strftime("%Y-%m-%d %H:%M")
+                    created_str = created_at.strftime(DATE_FORMATE)
 
                     formatted.append(
                         f"Game: {row['game']} | on: {row['platform']} | UserID: {row['username']} | Time: {created_str}"
                     )
-
-
-
+                    
                 output = "\n".join(formatted)
 
                 # Prevent messages > 2000 characters; discord enforces this
-                if len(output) > 1900:
-                    output = "Templete command: " + output[:1900] + "\n... (truncated)"
+                if len(output) > MAX_MESSAGE_LENGHT:
+                    output = "Templete command: " + output[:MAX_MESSAGE_LENGHT] + "\n... (truncated)"
 
                 await interaction.response.send_message(f"```{output}```")
 

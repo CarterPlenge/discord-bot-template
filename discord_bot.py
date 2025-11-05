@@ -41,6 +41,9 @@ class DiscordBot:
             print(f"Joined new guild: {guild.name} (ID: {guild.id})")
             self.database.get_guild_settings(guild.id)
     
+    # This code block is used to preform task when a message is sent. 
+    # --- Start of Code Block ---
+    
         # @self.client.event 
         # async def on_message(message):
         #     await self.handle_message(message)
@@ -51,6 +54,8 @@ class DiscordBot:
     #     somthing on basic messages.
     #     """
     #     return
+    
+    # --- End of code block ---
     
     # for more events check out here
     # https://discordpy.readthedocs.io/en/stable/api.html#event-reference

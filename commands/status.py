@@ -1,5 +1,8 @@
 from discord import app_commands, Object, Interaction, ActivityType, Activity, Status
 from permissions import require_any_role
+from ..logger import setup_logger
+
+logger = setup_logger(__name__)
 
 def register(tree: app_commands.CommandTree, database, guild_id: int):
     guild = Object(id=guild_id) if guild_id else None
@@ -61,8 +64,10 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
                 f"Bot status set to **{status}**{activity_text}",
                 ephemeral=True
             )
+            logger.debug(f"Status command executed.")
         except Exception as e:
             await interaction.response.send_message(
                 f"Error setting status: {str(e)}",
                 ephemeral=True
             )
+            logger.error(f"Status command failed. {str(e)}")

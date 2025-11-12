@@ -1,4 +1,7 @@
 from discord import app_commands, Object, Interaction
+from ..logger import setup_logger
+
+logger = setup_logger(__name__)
 
 def register(tree: app_commands.CommandTree, database, guild_id: int):
     guild = Object(id=guild_id) if guild_id else None
@@ -18,3 +21,4 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
             message,
             ephemeral=True
         )
+        logger.debug("Executed about command")

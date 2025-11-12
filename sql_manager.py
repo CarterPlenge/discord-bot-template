@@ -5,9 +5,10 @@ from psycopg2.extras import RealDictCursor
 from typing import Optional, Tuple, Any, List
 from dotenv import load_dotenv
 from contextlib import contextmanager
+from logger import setup_logger
 
 load_dotenv()
-
+logger = setup_logger(__name__)
 
 class SQLManager:
     """Manages PostgreSQL connections using connection pooling"""
@@ -72,7 +73,7 @@ class SQLManager:
                     
                 except psycopg2.Error as err:
                     conn.rollback()
-                    print(f"Query execution error: {err}")
+                    logger.error(f"Query execution error: {err}")
                     raise
 
     def add_game_request(self, guild_id: int, user_id: int, game: str, platform: str) -> Tuple[bool, str]:
@@ -83,9 +84,11 @@ class SQLManager:
                 VALUES (%s, %s, %s, %s);
             """
             self._execute_query(query, (guild_id, user_id, game.lower().strip(), platform))
+            logger.debug(f"Game request added: {game} on {platform}")
             return (True, f"Game request added: {game} on {platform}")
         except Exception as e:
-            return (False, f"Error adding game request: {str(e)}")
+            logger.debug(f"Error adding game request: {str(e)}.")
+            return (False, f"Error adding game request: {str(e)}.")
 
     def get_game_requests(self, guild_id: int) -> Tuple[bool, List]:
         """Retrieve all game requests"""
@@ -96,8 +99,10 @@ class SQLManager:
                 ORDER BY id DESC;
             """
             results = self._execute_query(query, (guild_id,), fetch="all")
+            logger.debug(f"Successfuly recevied game request.")
             return (True, results or [])
         except Exception as e:
+            logger.debug(f"Error getting game requests: {str(e)}.")
             return (False, str(e))
 
     def delete_game_request(self, guild_id: int, request_id: int) -> Tuple[bool, str]:
@@ -108,8 +113,10 @@ class SQLManager:
                 WHERE id = %s AND guild_id = %s;
             """
             self._execute_query(query, (request_id, guild_id))
+            logger.debug("Game request deleted. Request: {request_id}, Guild ID: {guild_id}")
             return (True, "Game request deleted")
         except Exception as e:
+            logger.debug(f"Error deleting game request: {str(e)}")
             return (False, f"Error deleting game request: {str(e)}")
 
     def get_guild_settings(self, guild_id: int) -> Tuple[bool, dict]:
@@ -123,8 +130,10 @@ class SQLManager:
             if not result:
                 self._create_default_guild_settings(guild_id)
                 result = self._execute_query(query, (guild_id,), fetch="one")
+            logger.debug("Got guild settings.")
             return (True, dict(result))
         except Exception as e:
+            logger.error(f"Failed getting guild settings. {str(e)}.")
             return (False, str(e))
 
     def _create_default_guild_settings(self, guild_id: int):
@@ -141,17 +150,17 @@ class SQLManager:
         try:
             query = "SELECT 1;"
             self._execute_query(query)
-            print("Database connection test passed")
+            logger.info("Database connection test passed")
             return True
         except Exception as e:
-            print(f"Database connection test failed: {e}")
+            logger.info(f"Database connection test failed: {e}")
             return False
 
     def close_pool(self):
         """Close all connections in the pool"""
         if self.pool:
             self.pool.closeall()
-            print("Connection pool closed")
+            logger.info("Connection pool closed")
 
     def __enter__(self):
         """Support context manager protocol"""

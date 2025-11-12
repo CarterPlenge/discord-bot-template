@@ -1,6 +1,10 @@
 from discord import app_commands, Object, Interaction
 from permissions import require_any_role
 from datetime import datetime
+from ..logger import setup_logger
+
+logger = setup_logger(__name__)
+
 
 # Prevent messages > 2000 characters; discord enforces this
 MAX_MESSAGE_LENGHT = 1900
@@ -50,9 +54,11 @@ def register(tree, database, guild_id):
                     output = "Templete command: " + output[:MAX_MESSAGE_LENGHT] + "\n... (truncated)"
 
                 await interaction.response.send_message(f"```{output}```")
+                logger.debug("Database query command passed")
 
         except Exception as e:
             await interaction.response.send_message(
                 f"An unexpected error occurred: {str(e)}",
                 ephemeral=True
             )
+            logger.debug(f"Database query command failed. {str(e)}")

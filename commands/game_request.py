@@ -1,6 +1,9 @@
 from discord import app_commands, Object, Interaction
 from channel import require_channel
 from sql_manager import SQLManager
+from ..logger import setup_logger
+
+logger = setup_logger(__name__)
 
 def register(tree: app_commands.CommandTree, database, guild_id: int):
     guild = Object(id=guild_id) if guild_id else None
@@ -38,8 +41,10 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
                 f"Templete command: Your request for **{game}** on **{platform_value}** has been received.{response}",
                 ephemeral=True
             )
+            logger.debug(f"Request command passed")
         else:
             await interaction.response.send_message(
                 f"Error: {message}",
                 ephemeral=True
             )
+            logger.debug(f"Request command failed.")

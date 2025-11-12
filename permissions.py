@@ -1,6 +1,6 @@
 """
-Commands can be configured from discord server settings.
-Not recommended you used this unless you have a specific need. 
+Commands can be configured from Discord server settings.
+I wouldn't recommended you use this unless you have a specific need. 
 """
 
 from discord import app_commands, Interaction

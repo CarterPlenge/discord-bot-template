@@ -12,7 +12,7 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
         text="text",
     )
     async def say(interaction: Interaction, text: str):
-        """The bot echos what was input"""
+        """The bot echoes what was input"""
         await interaction.response.send_message(
             text
         )

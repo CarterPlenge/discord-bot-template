@@ -1,13 +1,13 @@
 from discord import app_commands, Object, Interaction
 from permissions import require_any_role
 from datetime import datetime
-from ..logger import setup_logger
+from logger import setup_logger
 
 logger = setup_logger(__name__)
 
 
 # Prevent messages > 2000 characters; discord enforces this
-MAX_MESSAGE_LENGHT = 1900
+MAX_MESSAGE_LENGTH = 1900
 DATE_FORMATE = "%Y-%m-%d %H:%M"
 
 
@@ -25,7 +25,7 @@ def register(tree: app_commands.CommandTree, database, discord_object: discord.O
         """Handle database querys"""
         try:
             if databasequery == "gameRequest":
-                status, response = database.get_game_requests(discord_object.__getattribute__("id"))
+                status, response = database.get_game_requests(discord_object.id)
                 if not status:
                     raise Exception(response)
                 
@@ -48,8 +48,8 @@ def register(tree: app_commands.CommandTree, database, discord_object: discord.O
                 output = "\n".join(formatted)
 
                 # Prevent messages > 2000 characters; discord enforces this
-                if len(output) > MAX_MESSAGE_LENGHT:
-                    output = "Templete command: " + output[:MAX_MESSAGE_LENGHT] + "\n... (truncated)"
+                if len(output) > MAX_MESSAGE_LENGTH:
+                    output = "Templete command: " + output[:MAX_MESSAGE_LENGTH] + "\n... (truncated)"
 
                 await interaction.response.send_message(f"```{output}```")
                 logger.debug("Database query command passed")

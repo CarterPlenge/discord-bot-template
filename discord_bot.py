@@ -35,9 +35,9 @@ class DiscordBot:
             register_all(self.tree, self.database, self.discord_object)
 
             if self.discord_object is not None:
-                logger.info(f"Guild id found. Syncing commands for server {self.discord_object.__getattribute__("id")}.")
+                logger.info(f"Guild id found. Syncing commands for server {self.discord_object.id}.")
                 await self.tree.sync(guild=self.discord_object)
-                logger.info(f"Sucessfully synced commands to server {self.discord_object.__getattribute__("id")}.")
+                logger.info(f"Sucessfully synced commands to server {self.discord_object.id}.")
             else:
                 logger.info(f"No Guild id found. Syncing commands globaly.")
                 logger.info(f"NOTE: it can take Discord a few hours to propogate global commands.")

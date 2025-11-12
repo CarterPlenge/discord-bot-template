@@ -4,10 +4,8 @@ from ..logger import setup_logger
 
 logger = setup_logger(__name__)
 
-def register(tree: app_commands.CommandTree, database, guild_id: int):
-    guild = Object(id=guild_id) if guild_id else None
-
-    @tree.command(name="say", description="Makes the bot say what you type", guild=guild)
+def register(tree: app_commands.CommandTree, database, discord_object: discord.Object):
+    @tree.command(name="say", description="Makes the bot say what you type", guild=discord_object)
     @app_commands.describe(
         text="text",
     )

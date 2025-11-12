@@ -3,10 +3,9 @@ from ..logger import setup_logger
 
 logger = setup_logger(__name__)
 
-def register(tree: app_commands.CommandTree, database, guild_id: int):
-    guild = Object(id=guild_id) if guild_id else None
+def register(tree: app_commands.CommandTree, database, discord_object: discord.Object):
 
-    @tree.command(name="about", description="About this bot", guild=guild)
+    @tree.command(name="about", description="About this bot", guild=discord_object)
     async def about(interaction: Interaction):
         """Prints info about the bot"""
         

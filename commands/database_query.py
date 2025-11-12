@@ -11,10 +11,8 @@ MAX_MESSAGE_LENGHT = 1900
 DATE_FORMATE = "%Y-%m-%d %H:%M"
 
 
-def register(tree, database, guild_id):
-    guild = Object(id=guild_id) if guild_id else None
-
-    @tree.command(name="database-query", description="Query the database for information", guild=guild)
+def register(tree: app_commands.CommandTree, database, discord_object: discord.Object):
+    @tree.command(name="database-query", description="Query the database for information", guild=discord_object)
     @app_commands.describe(
         databasequery="What do you want to query for?"
     )
@@ -27,7 +25,7 @@ def register(tree, database, guild_id):
         """Handle database querys"""
         try:
             if databasequery == "gameRequest":
-                status, response = database.get_game_requests(guild_id)
+                status, response = database.get_game_requests(discord_object.__getattribute__("id"))
                 if not status:
                     raise Exception(response)
                 

@@ -5,10 +5,8 @@ from ..logger import setup_logger
 
 logger = setup_logger(__name__)
 
-def register(tree: app_commands.CommandTree, database, guild_id: int):
-    guild = Object(id=guild_id) if guild_id else None
-
-    @tree.command(name="request", description="Request a new game", guild=guild)
+def register(tree: app_commands.CommandTree, database, discord_object: discord.Object):
+    @tree.command(name="request", description="Request a new game", guild=discord_object)
     @app_commands.describe(
         game="The game you want to request.",
         platform="The platform the game is on."
@@ -26,7 +24,7 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
         platform_value = platform.value if isinstance(platform, app_commands.Choice) else platform
         
         success, message = database.add_game_request(
-                interaction.guild_id,
+                interaction.guild_id.__getattribute__("id"),
                 interaction.user.id,
                 game,
                 platform_value

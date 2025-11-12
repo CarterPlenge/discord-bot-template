@@ -4,7 +4,7 @@ from ..logger import setup_logger
 
 logger = setup_logger(__name__)
 
-def register(tree: app_commands.CommandTree, database, guild_id: int):
+def register(tree: app_commands.CommandTree, database, guild_id: discord.Object):
     guild = Object(id=guild_id) if guild_id else None
 
     @tree.command(name="status", description="Set the bot status and activity", guild=guild)

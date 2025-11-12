@@ -4,10 +4,8 @@ from ..logger import setup_logger
 
 logger = setup_logger(__name__)
 
-def register(tree: app_commands.CommandTree, database, guild_id: int):
-    guild = Object(id=guild_id) if guild_id else None
-
-    @tree.command(name="health-check", description="Check bot and db health ", guild=guild)
+def register(tree: app_commands.CommandTree, database, discord_object: discord.Object):
+    @tree.command(name="health-check", description="Check bot and db health ", guild=discord_object)
     async def health_check(interaction: Interaction):
         """Sends a message containing the databases current status"""
         success = database.test_connection()

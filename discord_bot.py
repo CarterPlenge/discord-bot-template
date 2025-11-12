@@ -8,14 +8,14 @@ load_dotenv()
 logger = setup_logger(__name__)
 
 class DiscordBot:
-    def __init__(self, database, guild_id: int | None = None):
+    def __init__(self, database, discord_object: discord.Object | None = None):
         """Initalize the discord bot"""
         intents = discord.Intents.default()
         intents.message_content = True
         self.client = discord.Client(intents=intents)
         self.tree = app_commands.CommandTree(self.client)
         self.database = database
-        self.guild_id = guild_id    # guild id == server id; leave as None to omit this
+        self.discord_object = discord_object    # guild id == server id; leave as None to omit this
                                     # recommend only using guild_id for dev purpouses. 
                                     # leave as none for global deployment. This could take 
                                     # a few hours for slash commands to propagate.      
@@ -29,15 +29,15 @@ class DiscordBot:
             logger.info(f"Logged in as {self.client.user}.")
             
             self.tree.clear_commands(guild=None)
-            self.tree.clear_commands(guild=discord.Object(id=self.guild_id))
+            self.tree.clear_commands(guild=self.discord_object)
             
             logger.info("Registering commands, database, and guild id...")
-            register_all(self.tree, self.database, self.guild_id)
+            register_all(self.tree, self.database, self.discord_object)
 
-            if self.guild_id is not None:
-                logger.info(f"Guild id found. Syncing commands for server {self.guild_id}.")
-                await self.tree.sync(guild=discord.Object(id=self.guild_id))
-                logger.info(f"Sucessfully synced commands to server {self.guild_id}.")
+            if self.discord_object is not None:
+                logger.info(f"Guild id found. Syncing commands for server {self.discord_object.__getattribute__("id")}.")
+                await self.tree.sync(guild=self.discord_object)
+                logger.info(f"Sucessfully synced commands to server {self.discord_object.__getattribute__("id")}.")
             else:
                 logger.info(f"No Guild id found. Syncing commands globaly.")
                 logger.info(f"NOTE: it can take Discord a few hours to propogate global commands.")

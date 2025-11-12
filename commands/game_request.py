@@ -35,7 +35,7 @@ def register(tree: app_commands.CommandTree, database, guild_id: int):
         if success:
             response = ""
             if platform_value == "PC":
-                response = "\n\nWe are still in the process of getting our steam PC Cafe liceses. Ask the esport director for more info."
+                response = "\n\nWe are still in the process of getting our Steam PC Cafe licenses. Ask the esports director for more info."
             
             await interaction.response.send_message(
                 f"Templete command: Your request for **{game}** on **{platform_value}** has been received.{response}",

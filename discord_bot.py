@@ -50,7 +50,7 @@ class DiscordBot:
             self.database.get_guild_settings(guild.id)
             logger.info(f"Created guild settings for guild: {guild.id} in database.")
     
-    # This code block is used to preform task when a message is sent. 
+    # This code block is used to perform a task when a message is sent. 
     # --- Start of Code Block ---
     
         # @self.client.event 
@@ -61,13 +61,13 @@ class DiscordBot:
     # async def handle_message(self, message):
     #     """
     #     Put functionality here if you want to do
-    #     somthing on basic messages.
+    #     something on basic messages.
     #     """
     #     return
     
     # --- End of code block ---
     
-    # for more events check out here
+    # for more events, check out here
     # https://discordpy.readthedocs.io/en/stable/api.html#event-reference
     
     def run(self, token):

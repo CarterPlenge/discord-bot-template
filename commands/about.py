@@ -10,10 +10,10 @@ def register(tree: app_commands.CommandTree, database, discord_object: discord.O
         """Prints info about the bot"""
         
         message = """
-        This bot was made using a templete from
+        This bot was made using a template from
         https://github.com/CarterPlenge/discord-bot-template
         
-        This about command has not been reconfigured from template default. 
+        This command has not been reconfigured from the template default. 
         """
         
         await interaction.response.send_message(

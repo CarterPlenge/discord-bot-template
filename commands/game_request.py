@@ -1,7 +1,5 @@
 from discord import app_commands, Object, Interaction
-from channel import require_channel
-from sql_manager import SQLManager
-from ..logger import setup_logger
+from logger import setup_logger
 
 logger = setup_logger(__name__)
 
@@ -19,12 +17,12 @@ def register(tree: app_commands.CommandTree, database, discord_object: discord.O
             app_commands.Choice(name="Switch", value="Switch")
         ]
     )
-    async def request(interaction: Interaction, game: str, platform: app_commands.Choice[str]):
+    async def request(interaction: Interaction, game: str, platform: str):
         """Allows users to request games on platforms and stores the info in the database"""
         platform_value = platform.value if isinstance(platform, app_commands.Choice) else platform
         
         success, message = database.add_game_request(
-                interaction.guild_id.__getattribute__("id"),
+                interaction.guild_id,
                 interaction.user.id,
                 game,
                 platform_value
@@ -36,7 +34,7 @@ def register(tree: app_commands.CommandTree, database, discord_object: discord.O
                 response = "\n\nWe are still in the process of getting our Steam PC Cafe licenses. Ask the esports director for more info."
             
             await interaction.response.send_message(
-                f"Templete command: Your request for **{game}** on **{platform_value}** has been received.{response}",
+                f"Template command: Your request for **{game}** on **{platform_value}** has been received.{response}",
                 ephemeral=True
             )
             logger.debug(f"Request command passed")

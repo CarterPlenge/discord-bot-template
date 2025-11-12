@@ -1,6 +1,6 @@
 from discord import app_commands, Object, Interaction
 from permissions import require_any_role
-from ..logger import setup_logger
+from logger import setup_logger
 
 logger = setup_logger(__name__)
 
@@ -11,6 +11,9 @@ def register(tree: app_commands.CommandTree, database, discord_object: discord.O
     )
     async def say(interaction: Interaction, text: str):
         """The bot echoes what was input"""
+        # Note: this command allows for people to use @everyone/@here spam
+        # ensure you restrict access to this command in discord's server settings (recommended)
+        # or by using the permissions decorator.
         await interaction.response.send_message(
             text
         )

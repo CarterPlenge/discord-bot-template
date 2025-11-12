@@ -1,5 +1,5 @@
 from discord import app_commands, Object, Interaction
-from ..logger import setup_logger
+from logger import setup_logger
 
 logger = setup_logger(__name__)
 

@@ -1,3 +1,5 @@
+import discord
+from discord import app_commands
 import importlib
 import pkgutil
 from logger import setup_logger

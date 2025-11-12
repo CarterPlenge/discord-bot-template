@@ -1,12 +1,11 @@
+import discord
 from discord import app_commands, Object, Interaction, ActivityType, Activity, Status
 from logger import setup_logger
 
 logger = setup_logger(__name__)
 
-def register(tree: app_commands.CommandTree, database, guild_id: discord.Object):
-    guild = Object(id=guild_id) if guild_id else None
-
-    @tree.command(name="status", description="Set the bot status and activity", guild=guild)
+def register(tree: app_commands.CommandTree, database, discord_object: discord.Object):
+    @tree.command(name="status", description="Set the bot status and activity", guild=discord_object)
     @app_commands.describe(
         status="The status to set (online, idle, dnd, invisible)",
         activity_type="The type of activity (playing, streaming, listening, watching, competing)",

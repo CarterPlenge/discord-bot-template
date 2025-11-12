@@ -1,3 +1,4 @@
+import discord
 from discord import app_commands, Object, Interaction
 from permissions import require_any_role
 from logger import setup_logger

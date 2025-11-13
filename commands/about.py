@@ -4,7 +4,7 @@ from logger import setup_logger
 
 logger = setup_logger(__name__)
 
-def register(tree: app_commands.CommandTree, database, discord_object: discord.Object):
+def register(tree: app_commands.CommandTree, discord_object: discord.Object):
 
     @tree.command(name="about", description="About this bot", guild=discord_object)
     async def about(interaction: Interaction):

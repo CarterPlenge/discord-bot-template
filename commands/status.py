@@ -4,7 +4,7 @@ from logger import setup_logger
 
 logger = setup_logger(__name__)
 
-def register(tree: app_commands.CommandTree, database, discord_object: discord.Object):
+def register(tree: app_commands.CommandTree, discord_object: discord.Object):
     @tree.command(name="status", description="Set the bot status and activity", guild=discord_object)
     @app_commands.describe(
         status="The status to set (online, idle, dnd, invisible)",

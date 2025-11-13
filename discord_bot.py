@@ -8,13 +8,12 @@ load_dotenv()
 logger = setup_logger(__name__)
 
 class DiscordBot:
-    def __init__(self, database, discord_object: discord.Object | None = None):
+    def __init__(self, discord_object: discord.Object | None = None):
         """Initalize the discord bot"""
         intents = discord.Intents.default()
         intents.message_content = True
         self.client = discord.Client(intents=intents)
         self.tree = app_commands.CommandTree(self.client)
-        self.database = database
         self.discord_object = discord_object    # guild id == server id; leave as None to omit this
                                     # recommend only using guild_id for dev purpouses. 
                                     # leave as none for global deployment. This could take 
@@ -31,8 +30,8 @@ class DiscordBot:
             self.tree.clear_commands(guild=None)
             self.tree.clear_commands(guild=self.discord_object)
             
-            logger.info("Registering commands, database, and guild id...")
-            register_all(self.tree, self.database, self.discord_object)
+            logger.info("Registering commands, and guild id...")
+            register_all(self.tree, self.discord_object)
 
             if self.discord_object is not None:
                 logger.info(f"Guild id found. Syncing commands for server {self.discord_object.id}.")
@@ -47,8 +46,6 @@ class DiscordBot:
         async def on_guild_join(guild):
             """Called when bot joins a new server"""
             logger.info(f"Joined new guild: {guild.name} (ID: {guild.id})")
-            self.database.get_guild_settings(guild.id)
-            logger.info(f"Created guild settings for guild: {guild.id} in database.")
     
     # This code block is used to perform a task when a message is sent. 
     # --- Start of Code Block ---
@@ -72,15 +69,3 @@ class DiscordBot:
     
     def run(self, token):
         self.client.run(token)
-
-if __name__ == "__main__":
-    import os
-    from sql_manager import SQLManager
-    db = SQLManager(min_conn=2, max_conn=10)
-    
-    TOKEN = os.getenv('DISCORD_TOKEN')
-    GUILD_ID = int(os.getenv('GUILD_ID')) if os.getenv('GUILD_ID') else None
-    
-    bot = DiscordBot(db, GUILD_ID)
-    bot.run(TOKEN)
-            

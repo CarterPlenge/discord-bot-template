@@ -1,28 +1,28 @@
 # Discord bot template
-This is a template for creating a discord bot with a database. This is based on a refactor i made for my [college's discord bot](https://github.com/GameMagma/NWMSU-Bot/pull/1). 
+This is a template for creating a Discord bot with a database. This is based on a refactor I made for my [college's discord bot](https://github.com/GameMagma/NWMSU-Bot/pull/1). 
 
-check other branches for differnt templates
- - no-database        // doesnt have a database
+Check other branches for different templates
+ - no-database        // doesn't have a database
 
 ## Getting started
 ### Getting the project locally
 software needed:
- - docker           to run the bot and db
- - git              to clone from github
-software recommended:
- - python           if you want to run code outside of docker
- - preferred IDE    if you dont want to edit everything in a text editor
+ - Docker           to run the bot and DB
+ - git              to clone from GitHub
+Software recommended:
+ - Python           if you want to run code outside of Docker
+ - preferred IDE    if you don't want to edit everything in a text editor
 
 Step 1: Clone the repo
-remember to cd to your desired directory 
+Remember to cd to your desired directory 
 ```
 git clone 
 cd 
 ```
 
-Optional Step: creating a virtual enviroment
+Optional Step: Creating a virtual environment
 ```
-# if you want to run code localy i would recommend using a venv
+# if you want to run code locally, I would recommend using a venv
 python -m venv env
 pip install -r requirements.txt
 
@@ -30,15 +30,15 @@ pip install -r requirements.txt
 # run "pip install psycopg2" instead
 ```
 
-Step 2: setting up .env
-use .envExample to create your .env
-command to do so
+Step 2: Setting up .env  
+Use .envExample to create your .env  
+command to do so:  
 ```cp .envExample .env```
 
 ```
 # you will need to [create a discord bot](https://discord.com/developers/applications) and put its token here
-DISCORD_TOKEN= # put your discord bots token here
-GUILD_ID=   # put the guild_id of the test server here, other wise remove it for global deployment
+DISCORD_TOKEN= # put your Discord bot's token here
+GUILD_ID=   # put the guild_id of the test server here, otherwise remove it for global deployment
 
 
 SQL_USER= testing        # create whatever username you want
@@ -51,7 +51,7 @@ SQL_DATABASE= dbtest     # name it whatever you want
 
 Step 3: Starting containers
 ```
-# make sure you have docker running
+# make sure you have Docker running
 
 # build the services
 docker compose build
@@ -81,8 +81,8 @@ This is a full list of things you should change to match your use case
 
 
 
-## Project arcitectuer
-basic overview of the project arcitecture
+## Project architecture
+basic overview of the project architecture
 ```
 commands/            # holds all commands
 ├── gameRequest.py  # example database write command
@@ -95,22 +95,22 @@ commands/            # holds all commands
 
 docs/               # holds additional documentation
 
-.dockerignore       # tells docker what to ignore (not copy)
+.dockerignore       # tells Docker what to ignore (not copy)
 .envEXAMPLE         # .env creation reference
 .gitignore          # tells git what to ignore
 requirements.txt    # keeps all required external libraries needed to run this project
 
-# I would recommend using discords built in way of locking slash commands
-# but if you want control with code you can use these
+# I would recommend using Discord's built-in way of locking slash commands
+# but if you want control with code, you can use these
 channel.py          # holds additional logic for locking commands to channels
 permissions.py      # holds additional logic for locking commands to roles
 
 SQLManager          # holds logic for database operations
-discordBot.py       # defines class discordBot which interacts with discord
+discordBot.py       # defines class discordBot, which interacts with Discord
 
-docker-compose.yml  # tells docker how to build the project
-Dockerfile          # tells docker how to build a container
-init.sql            # inital templet for database initialization
+docker-compose.yml  # tells Docker how to build the project
+Dockerfile          # tells Docker how to build a container
+init.sql            # database initialization
 
 main.py
 ```

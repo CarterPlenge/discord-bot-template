@@ -76,49 +76,6 @@ class SQLManager:
                     logger.error(f"Query execution error: {err}")
                     raise
 
-    def add_game_request(self, guild_id: int, user_id: int, game: str, platform: str) -> Tuple[bool, str]:
-        """Add a new game request to the database"""
-        try:
-            query = """
-                INSERT INTO game_request (guild_id, username, game, platform)
-                VALUES (%s, %s, %s, %s);
-            """
-            self._execute_query(query, (guild_id, user_id, game.lower().strip(), platform))
-            logger.debug(f"Game request added: {game} on {platform}")
-            return (True, f"Game request added: {game} on {platform}")
-        except Exception as e:
-            logger.debug(f"Error adding game request: {str(e)}.")
-            return (False, f"Error adding game request: {str(e)}.")
-
-    def get_game_requests(self, guild_id: int) -> Tuple[bool, List]:
-        """Retrieve all game requests"""
-        try:
-            query = """
-                SELECT * FROM game_request 
-                WHERE guild_id = %s 
-                ORDER BY id DESC;
-            """
-            results = self._execute_query(query, (guild_id,), fetch="all")
-            logger.debug(f"Successfuly recevied game request.")
-            return (True, results or [])
-        except Exception as e:
-            logger.debug(f"Error getting game requests: {str(e)}.")
-            return (False, str(e))
-
-    def delete_game_request(self, guild_id: int, request_id: int) -> Tuple[bool, str]:
-        """Delete a game request"""
-        try:
-            query = """
-                DELETE FROM game_request 
-                WHERE id = %s AND guild_id = %s;
-            """
-            self._execute_query(query, (request_id, guild_id))
-            logger.debug("Game request deleted. Request: {request_id}, Guild ID: {guild_id}")
-            return (True, "Game request deleted")
-        except Exception as e:
-            logger.debug(f"Error deleting game request: {str(e)}")
-            return (False, f"Error deleting game request: {str(e)}")
-
     def get_guild_settings(self, guild_id: int) -> Tuple[bool, dict]:
         """Gets guild settings"""
         try:

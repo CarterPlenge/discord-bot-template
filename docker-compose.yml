@@ -10,7 +10,6 @@ services:
     environment:
       DISCORD_TOKEN: ${DISCORD_TOKEN}
       GUILD_ID: ${GUILD_ID}
-    depends_on:
     networks:
       - bot_network
     logging:

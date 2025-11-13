@@ -9,6 +9,7 @@ Check other branches for different templates
 software needed:
  - Docker           to run the bot and DB
  - git              to clone from GitHub  
+
 Software recommended:  
  - Python           if you want to run code outside of Docker
  - preferred IDE    if you don't want to edit everything in a text editor

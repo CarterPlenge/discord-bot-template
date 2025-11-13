@@ -2,7 +2,9 @@
 This is a template for creating a Discord bot with a database. This is based on a refactor I made for my [college's discord bot](https://github.com/GameMagma/NWMSU-Bot/pull/1). 
 
 Check other branches for different templates
- - no-database        // doesn't have a database
+ - no-database
+ - no-examples
+ - no-db/no-examples
 
 ## Getting started
 ### Getting the project locally
